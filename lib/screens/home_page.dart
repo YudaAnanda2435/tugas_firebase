@@ -5,6 +5,8 @@ import '../Details/siam_details.dart';
 import '../Details/maine_coon_details.dart';
 import '../Details/bengal_details.dart';
 import '../Details/sphynx_details.dart';
+import 'form.dart'; // 
+import 'titipan_saya.dart'; 
 
 void main() {
   runApp(MaterialApp(
@@ -12,7 +14,14 @@ void main() {
   ));
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
   final List<Map<String, String>> cats = [
     {'name': 'Persia', 'image': 'assets/images/persia3.png', 'route': 'persia'},
     {
@@ -29,6 +38,36 @@ class HomePage extends StatelessWidget {
     {'name': 'Bengal', 'image': 'assets/images/persia3.png', 'route': 'bengal'},
     {'name': 'Sphynx', 'image': 'assets/images/persia3.png', 'route': 'sphynx'},
   ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    switch (_selectedIndex) {
+      case 0:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+        break;
+      case 1:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DataPenitipanPage()),
+        );
+        break;
+      case 2:
+        // Pass some data to TitipanSayaPage when navigating
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                TitipanSayaPage(data: {'key': 'value'}), // Pass data here
+          ),
+        );
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,19 +97,17 @@ class HomePage extends StatelessWidget {
                     Text("Indonesia"),
                   ],
                 ),
-               
               ],
             ),
             SizedBox(height: 20),
-           TextField(
+            TextField(
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search),
                 hintText: "Search Jenis Kucing",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
-                suffixIcon: Icon(Icons.tune,
-                    color: Colors.orangeAccent), // Menambahkan ikon di kanan
+                suffixIcon: Icon(Icons.tune, color: Colors.orangeAccent),
               ),
             ),
             SizedBox(height: 20),
@@ -124,7 +161,6 @@ class HomePage extends StatelessWidget {
                               Text(cats[index]['name']!),
                               TextButton(
                                 onPressed: () {
-                                  // Navigasi ke halaman detail berdasarkan route
                                   String route = cats[index]['route']!;
                                   Navigator.push(
                                     context,
@@ -165,6 +201,24 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book),
+            label: 'Form',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.data_usage),
+            label: 'Data',
+          ),
+        ],
       ),
     );
   }

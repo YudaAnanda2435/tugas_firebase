@@ -3,10 +3,7 @@ import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // Pastikan Provider diimport
 import 'screens/started.dart'; // Import Started screen
-import 'screens/optionlogin.dart';
 import 'provider/auth_provider.dart'; // Pastikan AuthProvider diimport
-import 'screens/home_page.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

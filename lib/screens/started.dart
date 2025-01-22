@@ -18,11 +18,7 @@ class _StartedState extends State<Started> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset(
-              '/assets/images/banner3.png', // Ganti dengan path gambar Anda
-              width: 100,
-              height: 100,
-            ),
+            // Menghapus bagian Image.asset
             const SizedBox(height: 20),
             const Text(
               'leave your beloved cat\nwithout worries',
@@ -119,8 +115,7 @@ class _StartedState extends State<Started> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                      child:
-                          const Text('Login'), // Tidak ada warna di Text
+                      child: const Text('Login'), // Tidak ada warna di Text
                     ),
                   ],
                 ),
